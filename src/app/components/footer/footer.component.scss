@@ -1,0 +1,109 @@
+:host {
+  display: block;
+}
+
+.site-footer {
+  background: #060608;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 70px 6% 35px;
+
+  .footer-top {
+    display: flex;
+    justify-content: space-between;
+    gap: 40px;
+    margin-bottom: 50px;
+    flex-wrap: wrap;
+  }
+
+  .footer-brand {
+    max-width: 380px;
+
+    .footer-logo {
+      font-family: 'AngelWish', serif;
+      font-size: 2.2rem;
+      letter-spacing: 2px;
+      color: #ffffff;
+      margin-bottom: 8px;
+      line-height: 0.95;
+
+      span {
+        color: #ff2a4b;
+      }
+    }
+
+    .footer-tagline {
+      color: #8e8e99;
+      font-size: 0.9rem;
+      line-height: 1.6;
+    }
+  }
+
+  .footer-nav {
+    display: flex;
+    gap: 50px;
+    flex-wrap: wrap;
+
+    .footer-col {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+
+      .col-title {
+        color: #ff2a4b;
+        font-size: 0.72rem;
+        font-weight: 700;
+        letter-spacing: 2px;
+        margin-bottom: 4px;
+      }
+
+      button,
+      a,
+      span {
+        background: transparent;
+        border: none;
+        color: #8e8e99;
+        font-size: 0.85rem;
+        text-align: left;
+        cursor: pointer;
+        padding: 0;
+        text-decoration: none;
+        transition: color 0.2s ease;
+
+        &:hover {
+          color: #ffffff;
+        }
+      }
+    }
+  }
+
+  .footer-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 30px;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    color: #52525b;
+    font-size: 0.75rem;
+    letter-spacing: 1px;
+    flex-wrap: wrap;
+    gap: 15px;
+
+    .footer-motto {
+      color: #ff2a4b;
+      font-weight: 700;
+      letter-spacing: 2px;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .footer-top {
+    flex-direction: column;
+    gap: 30px;
+  }
+
+  .footer-bottom {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}

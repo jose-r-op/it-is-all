@@ -1,0 +1,345 @@
+:host {
+  display: contents;
+}
+
+.cart-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  z-index: 1100;
+  animation: fadeIn 0.25s ease-out;
+}
+
+.cart-drawer {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 450px;
+  max-width: 92vw;
+  background: #0f0f13;
+  border-left: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: -10px 0 40px rgba(0, 0, 0, 0.8);
+  z-index: 1200;
+  display: flex;
+  flex-direction: column;
+  animation: slideInRight 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+.drawer-header {
+  padding: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+
+  .drawer-title {
+    font-size: 1rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    color: #ffffff;
+    margin-bottom: 2px;
+  }
+
+  .drawer-count {
+    font-size: 0.75rem;
+    color: #ff2a4b;
+    font-weight: 600;
+    letter-spacing: 1px;
+  }
+
+  .drawer-close {
+    background: #18181f;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: #ffffff;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+
+    &:hover {
+      background: #ff2a4b;
+      border-color: #ff2a4b;
+      transform: rotate(90deg);
+    }
+  }
+}
+
+.drawer-body {
+  flex: 1;
+  overflow-y: auto;
+  padding: 24px;
+}
+
+.cart-empty {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 40px 20px;
+
+  .empty-symbol {
+    font-size: 3.5rem;
+    color: #3f3f46;
+    margin-bottom: 16px;
+  }
+
+  h3 {
+    font-size: 1.2rem;
+    color: #ffffff;
+    margin-bottom: 8px;
+    letter-spacing: 1px;
+  }
+
+  p {
+    color: #71717a;
+    font-size: 0.88rem;
+    margin-bottom: 24px;
+    max-width: 260px;
+  }
+
+  .btn-primary {
+    background: #ff2a4b;
+    color: #ffffff;
+    border: none;
+    padding: 13px 26px;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.82rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: all 0.25s ease;
+
+    &:hover {
+      background: #ff4765;
+      transform: translateY(-2px);
+    }
+  }
+}
+
+.cart-items-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.cart-item {
+  display: flex;
+  gap: 16px;
+  background: #14141a;
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  padding: 14px;
+  border-radius: 6px;
+
+  .item-visual {
+    width: 70px;
+    height: 80px;
+    background: #1c1c24;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    color: #ff2a4b;
+    flex-shrink: 0;
+  }
+
+  .item-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .item-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 8px;
+    margin-bottom: 4px;
+
+    .item-name {
+      font-size: 0.86rem;
+      font-weight: 700;
+      color: #ffffff;
+      line-height: 1.3;
+    }
+
+    .item-remove {
+      background: transparent;
+      border: none;
+      color: #71717a;
+      cursor: pointer;
+      font-size: 0.85rem;
+      padding: 0 4px;
+      transition: color 0.2s ease;
+
+      &:hover {
+        color: #ff2a4b;
+      }
+    }
+  }
+
+  .item-size {
+    font-size: 0.72rem;
+    color: #8e8e99;
+    margin-bottom: 4px;
+
+    strong {
+      color: #ffffff;
+    }
+  }
+
+  .item-price {
+    font-size: 0.88rem;
+    font-weight: 700;
+    color: #ff2a4b;
+    margin-bottom: 8px;
+  }
+
+  .quantity-controls {
+    display: inline-flex;
+    align-items: center;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 4px;
+    overflow: hidden;
+    width: fit-content;
+
+    button {
+      background: #1c1c24;
+      border: none;
+      color: #ffffff;
+      width: 26px;
+      height: 24px;
+      cursor: pointer;
+      font-size: 0.85rem;
+      transition: background 0.2s ease;
+
+      &:hover {
+        background: #ff2a4b;
+      }
+    }
+
+    .quantity-number {
+      padding: 0 10px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: #ffffff;
+    }
+  }
+}
+
+.drawer-footer {
+  padding: 24px;
+  background: #121217;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+
+  .totals-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.85rem;
+    color: #8e8e99;
+    margin-bottom: 8px;
+
+    &.shipping-row .free-tag {
+      color: #4ade80;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+    }
+
+    &.total-highlight {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: #ffffff;
+      padding-top: 10px;
+      margin-top: 10px;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      margin-bottom: 20px;
+
+      .final-amount {
+        color: #ff2a4b;
+      }
+    }
+  }
+
+  .checkout-btn {
+    width: 100%;
+    background: #ff2a4b;
+    color: #ffffff;
+    border: none;
+    padding: 15px;
+    border-radius: 4px;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    transition: all 0.25s ease;
+    box-shadow: 0 4px 20px rgba(255, 42, 75, 0.4);
+
+    &:hover {
+      background: #ff4765;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(255, 42, 75, 0.6);
+    }
+  }
+
+  .clear-cart-link {
+    width: 100%;
+    margin-top: 10px;
+    background: transparent;
+    border: none;
+    color: #71717a;
+    font-size: 0.75rem;
+    cursor: pointer;
+    padding: 6px;
+    letter-spacing: 1px;
+    text-decoration: underline;
+
+    &:hover {
+      color: #ff2a4b;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .cart-drawer {
+    width: 100%;
+    max-width: 100vw;
+  }
+}

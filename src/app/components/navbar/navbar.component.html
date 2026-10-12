@@ -1,0 +1,60 @@
+<header class="site-header">
+  <div class="header-inner">
+    <!-- Logotipo con tipografía gótica AngelWish -->
+    <div class="brand-logo-container">
+      <button type="button" class="brand-logo-link" (click)="onNavigate('hero')">
+        IT IS ALL<span class="dot">.</span>
+      </button>
+    </div>
+
+    <!-- Navegación de escritorio con desplazamiento suave -->
+    <nav class="nav-links">
+      <button type="button" class="nav-item" (click)="onNavigate('hero')">
+        INICIO
+      </button>
+      <button type="button" class="nav-item" (click)="onNavigate('catalogo')">
+        CATÁLOGO
+      </button>
+      <button type="button" class="nav-item" (click)="onNavigate('vista-rapida')">
+        VISTA RÁPIDA
+      </button>
+      <button type="button" class="nav-item" (click)="onNavigate('nosotros')">
+        MANIFIESTO
+      </button>
+    </nav>
+
+    <!-- Acciones del header: Carrito interactivo y Menú móvil -->
+    <div class="header-actions">
+      <!-- Botón del Carrito con Contador Dinámico -->
+      <button type="button" class="cart-trigger" (click)="onCartClick()" aria-label="Abrir carrito de compras">
+        <span class="cart-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z" />
+            <path d="M3 6h18" />
+            <path d="M16 10a4 4 0 0 1-8 0" />
+          </svg>
+        </span>
+        <span class="cart-label">BOLSA</span>
+        <span class="cart-badge" [class.has-items]="cartCount > 0">
+          {{ cartCount }}
+        </span>
+      </button>
+
+      <!-- Botón hamburguesa para móviles -->
+      <button type="button" class="mobile-toggle" (click)="toggleMobileMenu()" aria-label="Menú principal">
+        <span class="bar" [class.open]="isMobileMenuOpen"></span>
+        <span class="bar" [class.open]="isMobileMenuOpen"></span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Menú desplegable para móviles -->
+  @if (isMobileMenuOpen) {
+    <nav class="mobile-nav">
+      <button type="button" (click)="onNavigate('hero')">01 // INICIO</button>
+      <button type="button" (click)="onNavigate('catalogo')">02 // CATÁLOGO</button>
+      <button type="button" (click)="onNavigate('vista-rapida')">03 // VISTA RÁPIDA</button>
+      <button type="button" (click)="onNavigate('nosotros')">04 // MANIFIESTO</button>
+    </nav>
+  }
+</header>

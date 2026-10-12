@@ -1,0 +1,54 @@
+<section class="kinetic">
+
+  <div class="intro">
+    <span class="eyebrow">PERSPECTIVA DINÁMICA</span>
+    <h2>Vista Rápida<span>.</span></h2>
+    <p>Explora nuestras piezas en perspectiva continua. Una selección sin reglas ni etiquetas.</p>
+  </div>
+
+  <!-- Galería animada para escritorio -->
+  <div class="desktop-gallery">
+    @for (lane of lanes; track lane.id) {
+    <div class="lane" [class.reverse]="lane.reverse">
+      <div class="lane-track">
+        @for (product of products; track product.id) {
+        <article class="visual-card" [class]="'visual-card tone-' + product.id">
+          <span class="card-number">{{ product.number }}</span>
+          <div class="symbol">{{ product.symbol }}</div>
+          <span class="card-label">{{ product.name }}</span>
+        </article>
+        }
+        @for (product of products; track product.id) {
+        <article class="visual-card" [class]="'visual-card tone-' + product.id" aria-hidden="true">
+          <span class="card-number">{{ product.number }}</span>
+          <div class="symbol">{{ product.symbol }}</div>
+          <span class="card-label">{{ product.name }}</span>
+        </article>
+        }
+      </div>
+    </div>
+    }
+  </div>
+
+  <!-- Carrusel para móvil -->
+  <div class="mobile-gallery">
+    <article class="mobile-card" [class]="'mobile-card tone-' + currentProduct.id">
+      <span class="card-number">{{ currentProduct.number }}</span>
+      <div class="symbol">{{ currentProduct.symbol }}</div>
+      <span class="card-label">{{ currentProduct.name }}</span>
+    </article>
+
+    <div class="mobile-controls">
+      <span>{{ currentIndex + 1 }} / {{ products.length }}</span>
+
+      <div class="arrows">
+        <button type="button" (click)="previous()" aria-label="Producto anterior">
+          ←
+        </button>
+        <button type="button" (click)="next()" aria-label="Producto siguiente">
+          →
+        </button>
+      </div>
+    </div>
+  </div>
+</section>

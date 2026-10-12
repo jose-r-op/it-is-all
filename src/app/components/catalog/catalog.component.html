@@ -1,0 +1,106 @@
+<section class="catalog-section" id="catalogo">
+  <div class="section-header">
+    <div>
+      <p class="section-eyebrow">ARSENAL DISPONIBLE</p>
+      <h2 class="section-title">Prendas Seleccionadas<span>.</span></h2>
+    </div>
+    <p class="section-subtitle">
+      @if (isLoading) {
+        Sincronizando inventario con la base de datos...
+      } @else if (error) {
+        Error de conexión con el arsenal.
+      } @else {
+        {{ filteredProducts.length }} piezas de corte exclusivo. Haz clic en tu talla y presiona "Agregar" para interactuar con tu bolsa.
+      }
+    </p>
+  </div>
+
+  @if (isLoading) {
+    <div class="catalog-state-box loading-state">
+      <div class="scanner-line"></div>
+      <p class="state-code">// CONEXIÓN ACTIVA CON API //</p>
+      <p class="state-msg">Sincronizando arsenal de prendas darkwear...</p>
+    </div>
+  } @else if (error) {
+    <div class="catalog-state-box error-state">
+      <div class="state-icon">✕</div>
+      <p class="state-code">// ERROR DE CONEXIÓN //</p>
+      <p class="state-msg">{{ error }}</p>
+      <button type="button" class="retry-btn" (click)="onRetry()">
+        REINTENTAR CONEXIÓN
+      </button>
+    </div>
+  } @else {
+    <!-- Barra de Filtros por Categoría -->
+    <div class="category-filters" role="tablist" aria-label="Filtro por categorías">
+      @for (cat of categories; track cat) {
+        <button
+          type="button"
+          class="filter-tab"
+          [class.active]="selectedCategory === cat"
+          (click)="selectCategory(cat)">
+          {{ cat }}
+        </button>
+      }
+    </div>
+
+    <div class="product-grid">
+      @for (item of filteredProducts; track item.id) {
+        <article class="product-card">
+          <!-- Insignia de la prenda -->
+          @if (item.badge) {
+            <span class="product-badge">{{ item.badge }}</span>
+          }
+
+          <!-- Contenedor visual del producto con retículas tácticas -->
+          <div class="product-visual">
+            <div class="visual-corner top-left"></div>
+            <div class="visual-corner top-right"></div>
+            <div class="visual-corner bottom-left"></div>
+            <div class="visual-corner bottom-right"></div>
+
+            <div class="product-symbol">{{ item.symbol }}</div>
+            <div class="product-code">NO. 0{{ item.id }} // IT-IS-ALL</div>
+          </div>
+
+          <!-- Datos del producto -->
+          <div class="product-details">
+            <div class="product-meta">
+              <span class="product-category">{{ item.category }}</span>
+              <span class="product-price">{{ formatCurrency(item.price) }}</span>
+            </div>
+
+            <h3 class="product-name">{{ item.name }}</h3>
+            <p class="product-tagline">{{ item.tagline }}</p>
+
+            <!-- Selector interactivo de tallas -->
+            <div class="sizes-row">
+              <span class="size-label">Talla:</span>
+              <div class="size-pills">
+                @for (size of item.sizes; track size) {
+                  <button
+                    type="button"
+                    class="size-pill"
+                    [class.active]="getSelectedSize(item) === size"
+                    (click)="selectSize(item.id, size)"
+                    [attr.aria-label]="'Seleccionar talla ' + size">
+                    {{ size }}
+                  </button>
+                }
+              </div>
+            </div>
+
+            <!-- Botón interactivo para añadir a la bolsa con talla seleccionada -->
+            <button type="button" class="add-to-cart-btn" (click)="onAddToCart(item)">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <line x1="12" y1="5" x2="12" y2="19"></line>
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+              </svg>
+              <span>AGREGAR [{{ getSelectedSize(item) }}]</span>
+            </button>
+          </div>
+        </article>
+      }
+    </div>
+  }
+</section>

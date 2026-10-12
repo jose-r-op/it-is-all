@@ -1,1 +1,92 @@
-/* You can add global styles to this file, and also import other style files */
+/* Import de tipografía moderna para complementar la estética Streetwear */
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Syne:wght@700;800&display=swap');
+
+/* Fuente gótica local de la marca */
+@font-face {
+  font-family: 'AngelWish';
+  src: url('/assets/fonts/Angel-wish.ttf') format('truetype'),
+       url('/assets/fonts/angel-wish.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+  /* Calibración de métricas para eliminar el espacio fantasma que empuja la letra hacia abajo */
+  ascent-override: 78%;
+  descent-override: 20%;
+  line-gap-override: 0%;
+}
+
+:root {
+  /* Paleta Streetwear Gótico (Darkwear / Neo-Goth) */
+  --bg-deep: #08080a;
+  --bg-surface: #111114;
+  --bg-card: #16161a;
+  --bg-elevated: #1f1f25;
+  --bg-glass: rgba(14, 14, 18, 0.75);
+
+  /* Acentos */
+  --accent-crimson: #ff2a4b;
+  --accent-crimson-glow: rgba(255, 42, 75, 0.35);
+  --accent-silver: #d1d5db;
+  --accent-chrome: #ffffff;
+
+  /* Bordes */
+  --border-subtle: rgba(255, 255, 255, 0.08);
+  --border-medium: rgba(255, 255, 255, 0.16);
+  --border-crimson: rgba(255, 42, 75, 0.4);
+
+  /* Tipografías */
+  --font-gothic: 'AngelWish', cursive, serif;
+  --font-street: 'Space Grotesk', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-display: 'Syne', sans-serif;
+
+  /* Textos */
+  --text-main: #f4f4f5;
+  --text-muted: #8e8e99;
+  --text-dim: #5a5a66;
+}
+
+/* Reseteo global */
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  background-color: var(--bg-deep);
+  color-scheme: dark;
+}
+
+body {
+  background-color: var(--bg-deep);
+  color: var(--text-main);
+  font-family: var(--font-street);
+  overflow-x: hidden;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Scrollbar personalizado estilo Streetwear Gótico */
+::-webkit-scrollbar {
+  width: 7px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-deep);
+}
+
+::-webkit-scrollbar-thumb {
+  background: #27272e;
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent-crimson);
+}
+
+/* Selección de texto con acento carmesí */
+::selection {
+  background: var(--accent-crimson);
+  color: #ffffff;
+}

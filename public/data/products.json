@@ -1,0 +1,68 @@
+[
+  {
+    "id": 1,
+    "name": "HOODIE OVERSIZED VOID",
+    "category": "HOODIES & SWEATERS",
+    "price": 185000,
+    "badge": "DROP EXCLUSIVO",
+    "tagline": "Heavyweight 480GSM / Algodón perchado",
+    "symbol": "✦",
+    "description": "Corte drop-shoulder extra ancho con detalles desgastados a mano y estampado gótico en alta densidad.",
+    "sizes": ["S", "M", "L", "XL"]
+  },
+  {
+    "id": 2,
+    "name": "PANTALÓN CARGO DARKWEAR",
+    "category": "PANTS & TECH",
+    "price": 210000,
+    "badge": "MÁS VENDIDO",
+    "tagline": "Bolsillos modulares / Cintas reflectivas",
+    "symbol": "☩",
+    "description": "Diseño utilitario agresivo con herrajes metálicos negros mate y correas ajustables de liberación rápida.",
+    "sizes": ["28", "30", "32", "34"]
+  },
+  {
+    "id": 3,
+    "name": "CAMISETA ACID WASHED SIGIL",
+    "category": "TEES",
+    "price": 95000,
+    "badge": "EDICIÓN LIMITADA",
+    "tagline": "Lavado vintage al ácido / Boxy fit",
+    "symbol": "◈",
+    "description": "Tipografía de inspiración gótica con tratamiento descolorido único en cada prenda. 100% algodón peinado.",
+    "sizes": ["S", "M", "L", "XL"]
+  },
+  {
+    "id": 4,
+    "name": "CADENA HARNESS GOTHIC CROSS",
+    "category": "ACCESORIOS",
+    "price": 65000,
+    "badge": "ACCESORIO",
+    "tagline": "Acero inoxidable 316L / Eslabones cubanos",
+    "symbol": "✝",
+    "description": "Arnés de pecho y cuello ajustable con cruces góticas pulidas en acabado cromo oscuro.",
+    "sizes": ["ÚNICA"]
+  },
+  {
+    "id": 5,
+    "name": "BOMBER JACKET CYBER GOTH",
+    "category": "JACKETS",
+    "price": 270000,
+    "badge": "NUEVA COLECCIÓN",
+    "tagline": "Nylon impermeable / Forro térmico rojo",
+    "symbol": "▲",
+    "description": "Silueta balloon con cierre bidireccional metálico y bordado de runas tonales en la espalda.",
+    "sizes": ["M", "L", "XL"]
+  },
+  {
+    "id": 6,
+    "name": "BALACLAVA DISTRESSED TECH",
+    "category": "ACCESORIOS",
+    "price": 55000,
+    "badge": "ÚLTIMAS PIEZAS",
+    "tagline": "Tejido elástico transpirable / Rasgados tácticos",
+    "symbol": "✕",
+    "description": "Pasamontañas deconstruido de estilo cyberpunk y gótico contemporáneo.",
+    "sizes": ["ÚNICA"]
+  }
+]

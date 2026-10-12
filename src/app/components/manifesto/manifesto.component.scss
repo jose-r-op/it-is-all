@@ -1,0 +1,87 @@
+:host {
+  display: block;
+}
+
+.about-section {
+  padding: 120px 6%;
+  background: #08080a;
+  position: relative;
+  overflow: hidden;
+
+  .about-container {
+    max-width: 850px;
+    margin: 0 auto;
+    text-align: center;
+    position: relative;
+    z-index: 2;
+  }
+
+  .gothic-sigil-watermark {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 26rem;
+    color: rgba(255, 255, 255, 0.02);
+    user-select: none;
+    pointer-events: none;
+    line-height: 1;
+  }
+
+  .section-eyebrow {
+    color: #ff2a4b;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 3px;
+    margin-bottom: 12px;
+  }
+
+  .about-headline {
+    font-size: clamp(2rem, 5vw, 3.4rem);
+    font-weight: 700;
+    line-height: 1.05;
+    letter-spacing: -1px;
+    color: #ffffff;
+    margin-bottom: 24px;
+
+    .gothic-highlight {
+      font-family: 'AngelWish', serif;
+      font-weight: normal;
+      color: #ff2a4b;
+      font-size: 1.08em;
+      letter-spacing: 1px;
+      display: inline-block;
+      line-height: 0.85;
+      margin-top: -0.1em;
+    }
+  }
+
+  .about-text {
+    font-size: 1.05rem;
+    line-height: 1.8;
+    color: #a1a1aa;
+    margin-bottom: 35px;
+
+    strong {
+      color: #ffffff;
+    }
+  }
+
+  .manifesto-tags {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    flex-wrap: wrap;
+
+    span {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      color: #ff2a4b;
+      background: rgba(255, 42, 75, 0.08);
+      border: 1px solid rgba(255, 42, 75, 0.25);
+      padding: 6px 14px;
+      border-radius: 999px;
+    }
+  }
+}

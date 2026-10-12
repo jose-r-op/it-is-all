@@ -1,0 +1,89 @@
+@if (isOpen) {
+  <!-- Fondo oscurecido con cierre al hacer clic -->
+  <div class="cart-backdrop" (click)="onClose()" aria-hidden="true"></div>
+
+  <!-- Panel deslizante del carrito -->
+  <aside class="cart-drawer" role="dialog" aria-labelledby="cart-title" aria-modal="true">
+    <div class="drawer-header">
+      <div>
+        <h2 id="cart-title" class="drawer-title">TU BOLSA DE COMPRA</h2>
+        <span class="drawer-count">[{{ cartCount }} {{ cartCount === 1 ? 'artículo' : 'artículos' }}]</span>
+      </div>
+      <button type="button" class="drawer-close" (click)="onClose()" aria-label="Cerrar bolsa de compras">
+        ✕
+      </button>
+    </div>
+
+    <!-- Contenido de los artículos -->
+    <div class="drawer-body">
+      @if (items.length === 0) {
+        <div class="cart-empty">
+          <div class="empty-symbol">✕</div>
+          <h3>Tu bolsa está vacía</h3>
+          <p>Aún no has seleccionado ninguna armadura para tu arsenal.</p>
+          <button type="button" class="btn-primary" (click)="onExplore()">
+            IR AL CATÁLOGO
+          </button>
+        </div>
+      } @else {
+        <div class="cart-items-list">
+          @for (item of items; track item.product.id + '-' + item.selectedSize; let i = $index) {
+            <article class="cart-item">
+              <div class="item-visual">
+                <span>{{ item.product.symbol }}</span>
+              </div>
+
+              <div class="item-info">
+                <div class="item-header">
+                  <h4 class="item-name">{{ item.product.name }}</h4>
+                  <button type="button" class="item-remove" (click)="onRemove(i)" title="Eliminar prenda">
+                    ✕
+                  </button>
+                </div>
+
+                <div class="item-size">TALLA: <strong>{{ item.selectedSize }}</strong></div>
+                <div class="item-price">{{ formatCurrency(item.product.price) }}</div>
+
+                <!-- Selector de cantidad (+ / -) -->
+                <div class="quantity-controls">
+                  <button type="button" (click)="onUpdateQty(i, -1)" aria-label="Disminuir cantidad">-</button>
+                  <span class="quantity-number">{{ item.quantity }}</span>
+                  <button type="button" (click)="onUpdateQty(i, 1)" aria-label="Aumentar cantidad">+</button>
+                </div>
+              </div>
+            </article>
+          }
+        </div>
+      }
+    </div>
+
+    <!-- Pie del carrito con totales y checkout -->
+    @if (items.length > 0) {
+      <div class="drawer-footer">
+        <div class="totals-row">
+          <span>Subtotal</span>
+          <span>{{ formatCurrency(cartTotal) }}</span>
+        </div>
+        <div class="totals-row shipping-row">
+          <span>Envío</span>
+          <span class="free-tag">GRATIS A TODO EL PAÍS</span>
+        </div>
+        <div class="totals-row total-highlight">
+          <span>TOTAL</span>
+          <span class="final-amount">{{ formatCurrency(cartTotal) }}</span>
+        </div>
+
+        <button type="button" class="checkout-btn">
+          <span>FINALIZAR COMPRA // CHECKOUT</span>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <path d="M5 12h14m-7-7 7 7-7 7" />
+          </svg>
+        </button>
+
+        <button type="button" class="clear-cart-link" (click)="onClear()">
+          Vaciar toda la bolsa
+        </button>
+      </div>
+    }
+  </aside>
+}
