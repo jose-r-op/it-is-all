@@ -1,5 +1,10 @@
 <!-- Barra de navegación superior -->
-<app-navbar [cartCount]="cartCount" (cartToggle)="toggleCart()" (navigate)="scrollTo($event)">
+<app-navbar
+  [cartCount]="cartCount"
+  (cartToggle)="toggleCart()"
+  (navigate)="scrollTo($event)"
+  (openAuth)="openAuthModal()"
+  (openAdmin)="openAdminProductModal()">
 </app-navbar>
 
 <main>
@@ -25,11 +30,31 @@
 <app-footer (navigate)="scrollTo($event)"></app-footer>
 
 <!-- Panel lateral deslizante de la bolsa -->
-<app-cart-drawer [isOpen]="isCartOpen" [items]="cart" (close)="closeCart()" (updateQuantity)="onUpdateQuantity($event)"
-  (removeItem)="onRemoveFromCart($event)" (clear)="onClearCart()" (explore)="scrollTo('catalogo')">
+<app-cart-drawer
+  [isOpen]="isCartOpen"
+  [items]="cart"
+  (close)="closeCart()"
+  (updateQuantity)="onUpdateQuantity($event)"
+  (removeItem)="onRemoveFromCart($event)"
+  (clear)="onClearCart()"
+  (explore)="scrollTo('catalogo')">
 </app-cart-drawer>
 
-<!-- Notificación Toast flotante al agregar/eliminar -->
+<!-- Modal de Autenticación (Login / Registro / Admin Demo) -->
+<app-auth-modal
+  [isOpen]="isAuthModalOpen"
+  (close)="closeAuthModal()"
+  (loginSuccess)="fetchProducts()">
+</app-auth-modal>
+
+<!-- Modal de Administrador: Carga de Ropa/Accesorios con Fotos -->
+<app-admin-product-modal
+  [isOpen]="isAdminProductModalOpen"
+  (close)="closeAdminProductModal()"
+  (productCreated)="onProductCreated($event)">
+</app-admin-product-modal>
+
+<!-- Notificación Toast flotante -->
 @if (activeNotification) {
 <div class="toast-notification" role="status" aria-live="polite">
   <span class="toast-bullet"></span>

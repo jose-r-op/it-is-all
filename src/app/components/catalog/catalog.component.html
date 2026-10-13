@@ -53,14 +53,18 @@
           }
 
           <!-- Contenedor visual del producto con retículas tácticas -->
-          <div class="product-visual">
+          <div class="product-visual" [class.has-image]="!!(item.imageUrl || item.coverImageUrl)">
             <div class="visual-corner top-left"></div>
             <div class="visual-corner top-right"></div>
             <div class="visual-corner bottom-left"></div>
             <div class="visual-corner bottom-right"></div>
 
-            <div class="product-symbol">{{ item.symbol }}</div>
-            <div class="product-code">NO. 0{{ item.id }} // IT-IS-ALL</div>
+            @if (item.imageUrl || item.coverImageUrl) {
+              <img [src]="item.imageUrl || item.coverImageUrl" [alt]="item.name" class="product-photo" loading="lazy" />
+            } @else {
+              <div class="product-symbol">{{ item.symbol }}</div>
+            }
+            <div class="product-code">NO. 0{{ item.id }} // {{ item.brand || 'IT-IS-ALL' }}</div>
           </div>
 
           <!-- Datos del producto -->

@@ -1,0 +1,297 @@
+@if (isOpen) {
+  <div class="admin-backdrop" (click)="onBackdropClick($event)" role="dialog" aria-modal="true">
+    <div class="admin-dialog">
+      <!-- Esquinas angulares tácticas -->
+      <div class="corner corner-tl"></div>
+      <div class="corner corner-tr"></div>
+      <div class="corner corner-bl"></div>
+      <div class="corner corner-br"></div>
+
+      <!-- Cabecera del Administrador -->
+      <div class="dialog-header">
+        <div>
+          <span class="dialog-code">// PANEL DE CONTROL // ARSENAL INVENTORY //</span>
+          <h2 class="dialog-title">ANEXAR PRENDA O ACCESORIO<span>.</span></h2>
+        </div>
+        <button type="button" class="close-btn" (click)="close.emit()" aria-label="Cerrar ventana">
+          ✕
+        </button>
+      </div>
+
+      <!-- Selector de Origen: Marca Propia vs Reventa / Vintage -->
+      <div class="origin-selector">
+        <button
+          type="button"
+          class="origin-btn"
+          [class.active]="origin === 'ItIsAll'"
+          (click)="setOrigin('ItIsAll')">
+          <span class="symbol">✦</span>
+          <div class="btn-text">
+            <strong>MARCA IT IS ALL</strong>
+            <small>Diseño original de la marca</small>
+          </div>
+        </button>
+
+        <button
+          type="button"
+          class="origin-btn"
+          [class.active]="origin === 'Resale'"
+          (click)="setOrigin('Resale')">
+          <span class="symbol">♲</span>
+          <div class="btn-text">
+            <strong>ROPA DE REVENTA / CURADA</strong>
+            <small>Piezas vintage o segunda mano exclusivas</small>
+          </div>
+        </button>
+      </div>
+
+      <!-- Formulario Principal -->
+      <form class="dialog-form" (ngSubmit)="onSubmit()">
+        <div class="form-grid">
+          <!-- Columna Izquierda: Datos del Producto -->
+          <div class="form-col">
+            <!-- Tipo de Categoría -->
+            <div class="field-group">
+              <label>CATEGORÍA PRINCIPAL</label>
+              <div class="category-pills">
+                <button
+                  type="button"
+                  class="cat-pill"
+                  [class.active]="categoryType === 'ropa'"
+                  (click)="setCategory('ropa')">
+                  👕 ROPA
+                </button>
+                <button
+                  type="button"
+                  class="cat-pill"
+                  [class.active]="categoryType === 'accesorios'"
+                  (click)="setCategory('accesorios')">
+                  🧢 ACCESORIOS
+                </button>
+                <button
+                  type="button"
+                  class="cat-pill"
+                  [class.active]="categoryType === 'calzado'"
+                  (click)="setCategory('calzado')">
+                  👟 CALZADO
+                </button>
+              </div>
+            </div>
+
+            <!-- Nombre de la prenda -->
+            <div class="field-group">
+              <label for="pName">NOMBRE DE LA PRENDA / ACCESORIO *</label>
+              <input
+                id="pName"
+                type="text"
+                name="name"
+                [(ngModel)]="name"
+                [placeholder]="origin === 'ItIsAll' ? 'Ej: Oversized Hoodie Heavyweight' : 'Ej: Chaqueta Vintage Carhartt Detroit'"
+                required />
+            </div>
+
+            <!-- Si es reventa: Marca y Condición -->
+            @if (origin === 'Resale') {
+              <div class="fields-row">
+                <div class="field-group">
+                  <label for="pBrand">MARCA DE ORIGEN</label>
+                  <input
+                    id="pBrand"
+                    type="text"
+                    name="brand"
+                    [(ngModel)]="brand"
+                    placeholder="Ej: Nike, Stüssy, Levi's..." />
+                </div>
+                <div class="field-group">
+                  <label for="pCondition">ESTADO DE LA PRENDA</label>
+                  <select id="pCondition" name="condition" [(ngModel)]="condition">
+                    <option value="NewWithTags">Nuevo con etiquetas</option>
+                    <option value="LikeNew">Como nuevo (Impecable)</option>
+                    <option value="Excellent">Excelente estado</option>
+                    <option value="GoodVintage">Vintage / Desgaste estético</option>
+                  </select>
+                </div>
+              </div>
+            }
+
+            <!-- Precios -->
+            <div class="fields-row">
+              <div class="field-group">
+                <label for="pPrice">PRECIO ($ COP) *</label>
+                <input
+                  id="pPrice"
+                  type="number"
+                  name="price"
+                  [(ngModel)]="price"
+                  placeholder="180000"
+                  required />
+              </div>
+              <div class="field-group">
+                <label for="pComparePrice">PRECIO ANTERIOR (OPCIONAL)</label>
+                <input
+                  id="pComparePrice"
+                  type="number"
+                  name="compareAtPrice"
+                  [(ngModel)]="compareAtPrice"
+                  placeholder="220000" />
+              </div>
+            </div>
+
+            <!-- Tallas y Stock -->
+            <div class="field-group">
+              <label>TALLAS DISPONIBLES</label>
+              <div class="sizes-selector">
+                @for (size of availableSizes; track size) {
+                  <button
+                    type="button"
+                    class="size-chip"
+                    [class.selected]="selectedSizes.includes(size)"
+                    (click)="toggleSize(size)">
+                    {{ size }}
+                  </button>
+                }
+              </div>
+            </div>
+
+            <div class="fields-row">
+              <div class="field-group">
+                <label for="pColor">COLOR / TONALIDAD</label>
+                <input
+                  id="pColor"
+                  type="text"
+                  name="color"
+                  [(ngModel)]="color"
+                  placeholder="Ej: Washed Black, Gris Carbón" />
+              </div>
+              <div class="field-group">
+                <label for="pStock">UNIDADES / STOCK</label>
+                <input
+                  id="pStock"
+                  type="number"
+                  name="stock"
+                  [(ngModel)]="stock"
+                  min="1" />
+              </div>
+            </div>
+
+            <!-- Descripción -->
+            <div class="field-group">
+              <label for="pDesc">DESCRIPCIÓN & ESPECIFICACIONES *</label>
+              <textarea
+                id="pDesc"
+                name="description"
+                [(ngModel)]="description"
+                rows="3"
+                placeholder="Gramaje del algodón, detalles del bordado o historia de la pieza vintage..."
+                required></textarea>
+            </div>
+          </div>
+
+          <!-- Columna Derecha: Carga de Fotos -->
+          <div class="form-col photos-col">
+            <div class="field-group">
+              <label>FOTOS DE LA PRENDA (MÍNIMO 1) *</label>
+              
+              <!-- Zona Drag & Drop -->
+              <div
+                class="dropzone"
+                (drop)="onDropFiles($event)"
+                (dragover)="onDragOver($event)"
+                (click)="fileInput.click()">
+                <input
+                  #fileInput
+                  type="file"
+                  multiple
+                  accept="image/*"
+                  (change)="onFilesSelected($event)"
+                  style="display: none;" />
+                <div class="drop-icon">
+                  <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                    <rect width="18" height="18" x="3" y="3" rx="2" ry="2"/>
+                    <circle cx="9" cy="9" r="2"/>
+                    <path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/>
+                  </svg>
+                </div>
+                <p class="drop-prompt"><strong>Arrastra fotos aquí</strong> o haz clic para explorar</p>
+                <span class="drop-hint">Formatos: JPG, PNG, WEBP. Puedes subir varias fotos a la vez.</span>
+              </div>
+            </div>
+
+            <!-- O agregar mediante URL directa -->
+            <div class="url-input-row">
+              <input
+                type="url"
+                [(ngModel)]="directImageUrl"
+                name="directUrl"
+                placeholder="O pega una URL de imagen..." />
+              <button type="button" class="add-url-btn" (click)="addDirectUrl()">
+                + AGREGAR
+              </button>
+            </div>
+
+            <!-- Galería de Miniaturas Previsualizadas -->
+            @if (selectedImages.length > 0) {
+              <div class="previews-container">
+                <span class="previews-title">// FOTOS ADJUNTAS ({{ selectedImages.length }}) //</span>
+                <div class="previews-grid">
+                  @for (img of selectedImages; track $index) {
+                    <div class="preview-card" [class.is-cover]="img.isCover">
+                      <img [src]="img.previewUrl" [alt]="img.name" />
+                      @if (img.isCover) {
+                        <span class="cover-badge">PORTADA</span>
+                      }
+                      <div class="card-overlay">
+                        @if (!img.isCover) {
+                          <button
+                            type="button"
+                            class="overlay-btn cover-btn"
+                            (click)="setAsCover($index)"
+                            title="Establecer como portada">
+                            ★
+                          </button>
+                        }
+                        <button
+                          type="button"
+                          class="overlay-btn del-btn"
+                          (click)="removeImage($index)"
+                          title="Eliminar foto">
+                          ✕
+                        </button>
+                      </div>
+                    </div>
+                  }
+                </div>
+              </div>
+            }
+          </div>
+        </div>
+
+        <!-- Feedback de alertas -->
+        @if (errorMessage) {
+          <div class="alert error-alert">
+            <span>⚠</span> {{ errorMessage }}
+          </div>
+        }
+        @if (successMessage) {
+          <div class="alert success-alert">
+            <span>✔</span> {{ successMessage }}
+          </div>
+        }
+
+        <!-- Botones de Acción -->
+        <div class="dialog-actions">
+          <button type="button" class="cancel-btn" (click)="close.emit()">
+            CANCELAR
+          </button>
+          <button type="submit" class="submit-btn" [disabled]="isLoading">
+            @if (isLoading) {
+              <span class="spinner"></span> PUBLICANDO EN ARSENAL...
+            } @else {
+              ✦ PUBLICAR AL CATÁLOGO
+            }
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+}

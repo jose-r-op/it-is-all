@@ -23,8 +23,37 @@
       </button>
     </nav>
 
-    <!-- Acciones del header: Carrito interactivo y Menú móvil -->
+    <!-- Acciones del header: Admin, Login, Carrito interactivo y Menú móvil -->
     <div class="header-actions">
+      <!-- Botón especial para Administrador: Anexar Ropa / Accesorio -->
+      @if (authService.isAdmin()) {
+        <button type="button" class="admin-add-trigger" (click)="onAdminClick()" title="Panel de Administrador">
+          <span class="plus-icon">＋</span>
+          <span class="label">ANEXAR PRENDA</span>
+        </button>
+      }
+
+      <!-- Estado de Autenticación / Login -->
+      @if (authService.isAuthenticated()) {
+        <div class="user-pill">
+          @if (authService.isAdmin()) {
+            <span class="role-badge">ADMIN</span>
+          }
+          <span class="user-name">{{ authService.currentUser()?.fullName?.split(' ')?.at(0) }}</span>
+          <button type="button" class="logout-link" (click)="onLogout()" title="Cerrar sesión">
+            ✕
+          </button>
+        </div>
+      } @else {
+        <button type="button" class="auth-trigger" (click)="onAuthClick()" aria-label="Iniciar sesión o registrarse">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/>
+            <circle cx="12" cy="7" r="4"/>
+          </svg>
+          <span>ACCEDER</span>
+        </button>
+      }
+
       <!-- Botón del Carrito con Contador Dinámico -->
       <button type="button" class="cart-trigger" (click)="onCartClick()" aria-label="Abrir carrito de compras">
         <span class="cart-icon">
@@ -55,6 +84,18 @@
       <button type="button" (click)="onNavigate('catalogo')">02 // CATÁLOGO</button>
       <button type="button" (click)="onNavigate('vista-rapida')">03 // VISTA RÁPIDA</button>
       <button type="button" (click)="onNavigate('nosotros')">04 // MANIFIESTO</button>
+      
+      @if (authService.isAdmin()) {
+        <button type="button" class="mobile-admin-btn" (click)="onAdminClick()">
+          ⚡ + ANEXAR PRENDA O ACCESORIO
+        </button>
+      }
+
+      @if (authService.isAuthenticated()) {
+        <button type="button" (click)="onLogout()">05 // SALIR ({{ authService.currentUser()?.fullName }})</button>
+      } @else {
+        <button type="button" (click)="onAuthClick()">05 // INICIAR SESIÓN / REGISTRO</button>
+      }
     </nav>
   }
 </header>
