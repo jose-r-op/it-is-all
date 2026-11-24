@@ -1,0 +1,11 @@
+/node_modules
+/dist
+/out-tsc
+/.angular
+/coverage
+.vercel
+.env*
+npm-debug.log*
+.DS_Store
+Thumbs.db
+
