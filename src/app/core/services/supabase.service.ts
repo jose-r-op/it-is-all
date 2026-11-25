@@ -26,8 +26,9 @@ export class SupabaseService {
   /** Carga perezosa del SDK para no inflar el bundle inicial. */
   private getClient(): Promise<SupabaseClient> {
     if (!this.clientPromise) {
+      const cleanUrl = environment.supabaseUrl.replace(/\/rest\/v1\/?$/, '').replace(/\/+$/, '');
       this.clientPromise = import('@supabase/supabase-js').then(({ createClient }) =>
-        createClient(environment.supabaseUrl, environment.supabaseAnonKey, {
+        createClient(cleanUrl, environment.supabaseAnonKey, {
           auth: { persistSession: false, autoRefreshToken: false }
         })
       );

@@ -14,6 +14,6 @@ export const environment = {
     'Efectivo Contraentrega (Pago al recibir)',
     'Tarjeta Débito/Crédito (Link Wompi / MercadoPago)'
   ],
-  supabaseUrl: 'TU_SUPABASE_URL',
-  supabaseAnonKey: 'TU_SUPABASE_ANON_KEY'
+  supabaseUrl: 'https://jqzhqoutbgcttmbyklan.supabase.co',
+  supabaseAnonKey: 'sb_publishable_gf9CLCmQ638lYICve2sz-A_jqIn1oQl'
 };
